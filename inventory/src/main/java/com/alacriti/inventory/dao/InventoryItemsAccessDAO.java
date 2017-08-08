@@ -136,7 +136,7 @@ public class InventoryItemsAccessDAO {
 
 		
 		
-		public void deleteDataFromInventoryItemsDAO(Connection connection,String p)
+		public void deleteDataFromInventoryItemsDAO(Connection connection,String p) 
 		{
 				
 				PreparedStatement preparedStatement=null;
@@ -160,6 +160,14 @@ public class InventoryItemsAccessDAO {
 					
 					log.error("Exception Details ::deleteDataFromInventoryItemsDAO"+e);
 					
+				}
+				finally{
+					try {
+						preparedStatement.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 		}
 		
