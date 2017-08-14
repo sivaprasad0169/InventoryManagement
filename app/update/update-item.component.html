@@ -1,0 +1,26 @@
+
+<fieldset>
+
+  <form #userForm="ngForm" >
+    <table>
+
+      <tr><td>Item Name    </td><td><input type="text" name="itemName" [(ngModel)]=item.itemName #NewName ngModel></td></tr>
+
+
+
+      <tr><td>Available Quantity  </td><td><input type="number" name="range" min="0" [(ngModel)]=item.availableQuantity #available ngModel disabled></td></tr>
+
+      <tr><td>Purchased </td><td><input type="number" name="produce" min="0" [(ngModel)]=purchased #purchase (keyup)="OnKeyPress(consume.value,purchase.value)"></td></tr>
+
+
+      <tr><td>Consumed </td><td><input type="number" name="consume" min="0" [(ngModel)]=consumed #consume (keyup)="OnKeyPress(available.value,consume.value,purchase.value)"></td></tr>
+
+      <tr><td>Updated  Quantity </td><td><input type="number" name="updated" [(ngModel)]="result" #updatedQuantity ngModel disabled ></td></tr>
+
+      <tr><td colspan="2"><button class="button" style="vertical-align:middle" (click)="onSaveClick(itemId,NewName.value,purchase.value,consume.value,updatedQuantity.value)"><span>Save</span></button></td></tr>
+    </table>
+  </form>
+
+</fieldset>
+
+

@@ -1,0 +1,17 @@
+body{
+  position: fixed;
+  bottom: 0%;
+  background-color: black;
+  border: 2px black;
+  width:98%;
+}
+
+footer {
+  height: 10px;
+  padding: 1em;
+  color: black;
+  font-size: 12px;
+  background-color: darkgray;
+  clear: left;
+  text-align: center;
+}

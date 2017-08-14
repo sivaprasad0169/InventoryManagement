@@ -1,0 +1,140 @@
+<div class="sort" *ngIf="itemsDetailsFlag" >
+  <form id="demo-2">
+    <input type="search" placeholder="Search" #msgref (keyup)="SeachText(msgref.value,ref.value,select.value)">
+    <select id="select" #ref (change)="SeachText(msgref.value,ref.value,select.value)">
+      <option value="Item_Name">Item Name</option>
+      <option value="Available_Quantity">Quantity</option>
+    </select>
+
+      <select #select (click)="SeachText(msgref.value,ref.value,select.value)" id="category">
+        <option value="0">All Categories</option>
+        <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
+      </select>
+  </form>
+</div>
+
+
+
+
+<div class="container" *ngIf="itemsDetailsFlag">
+  <h2>Inventory Items Details</h2>
+
+
+
+
+
+
+
+  <table class="table table-hover">
+
+    <tr>
+      <th>Item Name</th>
+      <th>Available Quantity</th>
+      <th>View Details</th>
+    </tr>
+
+    <tr *ngFor="let itemDetail of itemsDetails">
+      <td>{{itemDetail.itemName}}</td>
+      <td>{{itemDetail.availableQuantity}}</td>
+      <td><button (click)="onDetailsClick(itemDetail)" class="details">Details</button></td>
+    </tr>
+
+
+  </table>
+  <div *ngIf="itemsDetails==null">
+    <h3>Error:{{getError}}</h3>
+  </div>
+</div>
+
+
+<div *ngIf="itemDetailsFlag" class="itemDetails">
+
+  <h3>Statistics of {{itemName}}</h3>
+  <button class="back" (click)="onBackClick()"><span>Back</span></button>
+  <main>
+
+    <input id="tab1" type="radio" name="tabs" checked>
+    <label for="tab1">Full Details</label>
+
+    <input id="tab2" type="radio" name="tabs">
+    <label for="tab2">Purchases</label>
+
+    <input id="tab3" type="radio" name="tabs">
+    <label for="tab3">Consumes</label>
+
+
+    <section id="content1">
+      <table>
+
+        <tr>
+          <th>Operation Type</th>
+          <th>Quantity</th>
+          <th>Available</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Updated By</th>
+        </tr>
+
+        <tr *ngFor="let itemDetail of itemDetails">
+          <td>{{itemDetail.operationType}}</td>
+          <td>{{itemDetail.updatedQuantity}}</td>
+          <td>{{itemDetail.availableQuantity}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortDate'}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortTime'}}</td>
+          <td>{{itemDetail.updatedBy}}</td>
+        </tr>
+
+
+      </table>
+    </section>
+
+    <section id="content2">
+      <table>
+
+        <tr>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Updated By</th>
+        </tr>
+
+        <tr *ngFor="let itemDetail of itemPurchaseDetails">
+
+          <td>{{itemDetail.updatedQuantity}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortDate'}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortTime'}}</td>
+          <td>{{itemDetail.updatedBy}}</td>
+        </tr>
+
+
+
+      </table>
+    </section>
+
+    <section id="content3">
+      <table>
+
+        <tr>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Updated By</th>
+        </tr>
+
+        <tr *ngFor="let itemDetail of itemConsumeDetails">
+
+          <td>{{itemDetail.updatedQuantity}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortDate'}}</td>
+          <td>{{itemDetail.updatedDate | date:'shortTime'}}</td>
+          <td>{{itemDetail.updatedBy}}</td>
+        </tr>
+
+
+      </table>
+    </section>
+
+  </main>
+
+</div>
+
+

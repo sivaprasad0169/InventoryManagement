@@ -1,0 +1,12 @@
+
+body{
+  margin: -8px ;
+  margin-right: 0px;
+}
+.body-content{
+  margin-left:3%;
+  mso-border-shadow: 5px;
+}
+head-component{
+  background-color: black;
+}

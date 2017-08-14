@@ -3,7 +3,6 @@ package com.alacriti.inventory.resource;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -13,81 +12,78 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
-import com.alacriti.inventory.deligate.InventoryItemsDeligate;
-import com.alacriti.inventory.models.InventoryItemsModel;
+import com.alacriti.inventory.delegate.InventoryItemsDelegate;
+import com.alacriti.inventory.models.AvailableItemsModel;
+import com.alacriti.inventory.models.CreateItemModel;
+import com.alacriti.inventory.models.DeleteItemModel;
 import com.alacriti.inventory.models.SortAndSearchModel;
+import com.alacriti.inventory.models.UpdateItemModel;
 
 
 @Path("InventoryItems")
 public class InventoryItemsResource {
 	
 	
-	public static final Logger log= Logger.getLogger(LoginDetailsResource.class);
-	InventoryItemsDeligate inventoryItemsDeligate=new InventoryItemsDeligate();
+	public static final Logger log= Logger.getLogger(InventoryItemsResource.class);
+	InventoryItemsDelegate inventoryItemsDelegate=new InventoryItemsDelegate();
 	
 	
 	@GET
 	@Path("get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<InventoryItemsModel> getAllInventoryItems()
+	public List<AvailableItemsModel> getAllItems()
 	{
-		log.debug("DEBUG getAllInventoryItems " );
-		
-		return inventoryItemsDeligate.getAllDataFromInventoryItemsTable();
+		return inventoryItemsDelegate.getAllInventoryItems();
 	}
 	
+	
+	@POST
+	@Path("getItemsBySortingAndSearching")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<AvailableItemsModel> getAllItemsBySortAndSearch(SortAndSearchModel p)
+	{
+		return inventoryItemsDelegate.getAllInventoryItemsBySortAndSearch(p);
+	}
 	
 	@PUT
 	@Path("update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<InventoryItemsModel> updateInventoryItems(InventoryItemsModel p[])
+	public int updateItemsInDetails(UpdateItemModel p[])
 	{
 		log.debug("DEBUG updateInventoryItems " );
+		return inventoryItemsDelegate.updateItemsInDetails(p);
 		
-		inventoryItemsDeligate.updateDataToTableInventoryItems(p);
-		return inventoryItemsDeligate.getAllDataFromInventoryItemsTable();
+		
 	}
 	
 	
 	
 	@POST
 	@Path("post")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<InventoryItemsModel> addInventoryItems(InventoryItemsModel p[])
+	public int addItemsToDetails(CreateItemModel p[])
 	{
 		log.debug("DEBUG addInventoryItems " );
+		return inventoryItemsDelegate.addItemsToDetailsDelegate(p);
 		
-		inventoryItemsDeligate.addDataToTableInventoryItems(p);
-		return inventoryItemsDeligate.getAllDataFromInventoryItemsTable();
-	}
-	
-	
-	
-	@DELETE
-	@Path("delete")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.TEXT_PLAIN)
-	public List<InventoryItemsModel> deleteInventoryItem(String str)
-	{
-		log.debug("DEBUG deleteInventoryItem " );
 		
-		inventoryItemsDeligate.deleteDataFromTableInventoryItems(str);
-		return inventoryItemsDeligate.getAllDataFromInventoryItemsTable();
 	}
 	
 	
 	
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("delete")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getItemsBySortingAndSearching")
-	public List<InventoryItemsModel> getAllDetailsBySeaching(SortAndSearchModel p)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public int deleteInventoryItem(DeleteItemModel d)
 	{
-		log.debug("DEBUG getAllDetailsBySeaching " );
+		log.debug("DEBUG deleteInventoryItem " );
 		
-		return inventoryItemsDeligate.getInventoryItemsBySortingAndSearching(p);
+		return inventoryItemsDelegate.deleteItemsInDetails(d);
+		
 	}
 	
 

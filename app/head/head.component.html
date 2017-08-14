@@ -1,0 +1,32 @@
+
+<div class="container">
+    <div class="title">
+      <pre>
+        <p id="title1">{{title1}}<span id="title2">{{title2}}</span></p>
+      </pre>
+      <div *ngIf="!isLoggedIn"  class="log">
+
+        <a routerLink="login">Login</a>
+        <a routerLink="register">SignUp</a>
+
+
+      </div>
+      <div *ngIf="isLoggedIn" class="logout">
+        <h4>Hello {{loggedUser}}..!</h4>
+        <a (click)="onLogOutClick()">Log Out</a>
+      </div>
+
+    </div>
+   <div class="routers">
+      <nav >
+        <a routerLink="/home" id="home">Home</a>
+        <a routerLink="/available">Availble Items</a>
+        <a routerLink="/update"> Update Items</a>
+        <a routerLink="/details">Details</a>
+      </nav>
+   </div>
+
+
+</div>
+
+

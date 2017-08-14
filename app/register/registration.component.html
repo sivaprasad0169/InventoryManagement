@@ -1,0 +1,65 @@
+<div id="registration" class="modalDialog">
+
+  <div>
+
+
+    <a routerLink="/home" title="Close" class="close"> x </a>
+    <legend>Registration Form</legend>
+
+    <form [formGroup]="registerForm">
+
+      <table>
+        <tr>
+          <td>First Name </td>
+          <td>
+            <div><input type="text" #fname formControlName="firstName"></div>
+            <div *ngIf="registerForm.controls['firstName'].hasError('required')">
+              Please Enter a valid name
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td><input type="text" #lname></td>
+        </tr>
+        <tr>
+          <td>User Name </td>
+          <td>
+            <input type="text" #uname formControlName="userName" placeholder="User Name">
+            <div *ngIf="registerForm.controls['userName'].hasError('required')">
+              Please Enter a valid user name
+            </div>
+            <div *ngIf="registerForm.controls['userName'].hasError('pattern')">
+              FirstLetter should be Capital
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><input type="email" #email></td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td><input type="password" #pwd formControlName="password" [(ngModel)]="password"></td>
+        </tr>
+        <tr>
+          <td>Confirm Password</td>
+          <td>
+            <input type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword" (blur)="checkPasswordMatching()">
+            <small [hidden]="registerForm.controls.confirmPassword.valid || (registerForm.controls.confirmPassword.pristine && !registerForm.submitted)" class="text-danger">
+              Password mismatch
+            </small>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Upload Photo</td>
+          <td><input type="file" accept="image/png" #file></td>
+        </tr>
+        <tr id="errorMsg"><td colspan="2">{{errorMsg}}</td></tr>
+        <td>Registered..?<a routerLink="/login"> Login </a> </td>
+        <td><button id="registration-submit" [disabled]="!registerForm.valid" (click)="onSumbitForm(uname.value,pwd.value,fname.value,lname.value,email.value)">Submit Details</button></td>
+      </table>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="sort" *ngIf="!addItemFlag">
+  <form id="demo-2">
+    <button class="button add" style="vertical-align:middle" (click)="onAddItemClick()"><span>Add Item</span></button>
+    <input type="search" placeholder="Search" #msgref (keyup)="SeachText(msgref.value,ref.value,select.value)">
+    <select id="select" #ref (change)="SeachText(msgref.value,ref.value,select.value)">
+
+      <option value="Item_Name">Item Name</option>
+      <option value="Available_Quantity">Quantity</option>
+    </select>
+
+      <select #select (click)="SeachText(msgref.value,ref.value,select.value)" id="category">
+        <option value="0">All Categories</option>
+        <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
+      </select>
+  </form>
+</div>
+
+
+
+
+<br>
+
+
+
+<h2>Update Inventory Items</h2>
+
+<div *ngIf="addItemFlag" class="add_details">
+  <form [formGroup]="userForm" *ngIf="selectCategoryFlag">
+    <table>
+    <tr>
+      <td>
+        <label>Item Name</label>
+      </td>
+      <td><input type="text"placeholder="Item Name" formControlName="itemName" #itemName>
+          <div *ngIf="userForm.controls['itemName'].hasError('required')">
+            Please Enter a valid name
+           </div>
+     </td>
+    </tr>
+    <tr>
+     <td>
+       <label>Item Quantity</label>
+     </td>
+      <td>
+        <input type="number" placeholder="Quantity" formControlName="quantity" min="0" #quantity>
+        <div *ngIf="userForm.controls['quantity'].hasError('required')">
+          Please Enter valid amount of Quantity
+        </div>
+      </td>
+    </tr>
+      <!--<tr >
+        <td>Category</td>
+
+
+
+        <td *ngIf="selectCategoryFlag">
+              <select #selected (click)="onselect(selected.value)">
+                <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
+              </select>
+              <small (click)="changeAddCategoryFlag()">Add Category</small>
+        </td>
+
+
+        <td *ngIf="addCategoryFlag">
+          <input type="text" #category>
+          <small (click)="changeAddCategoryFlag()">Select Category</small>
+        </td>
+      </tr>-->
+    <tr>
+      <td>Category</td>
+      <td>
+      <select #selected>
+        <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
+      </select>
+      <small (click)="changeAddCategoryFlag()"> Add Category</small>
+    </td>
+  </tr>
+    <tr>
+      <td>
+        <button [disabled]="!userForm.valid" class="edit" (click)="AddItemDetails(itemName.value,quantity.value,selected.value)">Add</button>
+      </td>
+      <td>
+        <button class="remove" (click)="onCancelItem()">Cancel</button>
+      </td>
+    </tr>
+    </table>
+  </form>
+
+  <form [formGroup]="categoryForm" *ngIf="addCategoryFlag">
+    <input type="text" placeholder="Category Name" formControlName="categoryName" #addCategoryName>
+    <div *ngIf="categoryForm.controls['categoryName'].hasError('required')">
+      Please Enter a valid name
+    </div><br>
+    <button (click)="addCategory(addCategoryName.value)">Add</button>
+    <button (click)="changeAddCategoryFlag()">Back</button>
+    <p>{{addCategoryError}}</p>
+  </form>
+</div>
+
+
+
+
+
+<table *ngIf="availableitemsFlag">
+  <tr >
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th colspan="2"></th>
+  </tr>
+  <tr *ngFor="let item of items">
+    <td>{{item.itemName}}</td>
+    <td>{{item.availableQuantity}}</td>
+    <td (click)="onEditClick(item)" ><input type="submit" value="Edit" class="edit"></td>
+    <td><button class="remove" (click)="onRemoveClick(item)">Remove</button></td>
+  </tr>
+</table>
+
+
+
+
+
+<!--
+
+<div (click)="onClick(item)"  *ngFor="let item of items">
+  <div>{{item.itemId}}</div>
+</div>-->

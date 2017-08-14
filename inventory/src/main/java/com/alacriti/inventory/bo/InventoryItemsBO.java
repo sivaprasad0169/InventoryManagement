@@ -5,100 +5,166 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.alacriti.inventory.dao.InventoryItemsAccessDAO;
+import com.alacriti.inventory.dao.InventoryItemsDAO;
+import com.alacriti.inventory.exceptions.BOException;
+import com.alacriti.inventory.exceptions.DAOException;
+import com.alacriti.inventory.models.AvailableItemsModel;
+import com.alacriti.inventory.models.CreateItemModel;
+import com.alacriti.inventory.models.DeleteItemModel;
 import com.alacriti.inventory.models.SortAndSearchModel;
-import com.alacriti.inventory.models.InventoryItemsModel;
-
+import com.alacriti.inventory.models.UpdateItemModel;
 
 public class InventoryItemsBO {
 	
+	
+	
+	
 	public static final Logger log= Logger.getLogger(InventoryItemsBO.class);
-	InventoryItemsAccessDAO inventoryItemsDAO=null;
+	InventoryItemsDAO inventoryItemsDAO=null;
 	
 	
-	public List<InventoryItemsModel> getAllInventoryItemsBO(Connection connection)
+	
+	public List<AvailableItemsModel> getAllInventoryItemsFromDetails(Connection connection) throws BOException
 	{
-		List<InventoryItemsModel> list=null;
+		List<AvailableItemsModel> list=null;
 		try
 		{
-			inventoryItemsDAO=new InventoryItemsAccessDAO();
-			list=inventoryItemsDAO.getAllInventoryItemsDAO(connection);
+			
+			inventoryItemsDAO=new InventoryItemsDAO();
+			list=inventoryItemsDAO.getAllInventoryItemsFromDetails(connection);
+			
+		}
+		catch(DAOException daoe)
+		{
+			log.error("Exception Details: getAllInventoryItemsFromDetails "+daoe);
+			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
-			log.error("Exception Details:getAllInventoryItemsBO"+e);
+			
+			log.error("Exception Details: getAllInventoryItemsFromDetails "+e);
+			throw new BOException("Exception Occured In BO");
+			
 		}
 		return list;
 	}
 	
 	
 	
-	public void addDataToLoginDetailsBO(Connection connection,InventoryItemsModel p[])
+	public List<AvailableItemsModel> getAllInventoryItemsFromDetailsBySortAndSearch(Connection connection,SortAndSearchModel p) throws BOException    
 	{
+		
+		List<AvailableItemsModel> list=null;
 		try
 		{
-			inventoryItemsDAO=new InventoryItemsAccessDAO();
-			inventoryItemsDAO.addDataInventoryItemsDAO(connection, p);
+			
+			inventoryItemsDAO=new InventoryItemsDAO();
+			list=inventoryItemsDAO.getAllItemsFromDetailsBySortAndSearch(connection, p);
+			
+		}
+		catch(DAOException daoe)
+		{
+			log.error("Exception Details: getAllInventoryItemsFromDetailsBySortAndSearch "+daoe);
+			throw new BOException();
 			
 		}
 		catch(Exception e)
 		{
-			log.error("Exception Details: addDataToLoginDetailsBO"+e);
-		}
-	
-		
-	}
-	
-	
-	
-	public void updateDataToLoginDetailsBO(Connection connection,InventoryItemsModel p[])
-	{
-		try
-		{
-			inventoryItemsDAO=new InventoryItemsAccessDAO();
-			inventoryItemsDAO.updateDataToInventoryItemsDAO(connection, p);
 			
-		}
-		catch(Exception e)
-		{
-			log.error("Exception Details: updateDataToLoginDetailsBO"+e);
-		}
-	
-	}
-	
-	
-	
-	public void deleteDataFromLoginDetailsBO(Connection connection,String p)
-	{
-		
-		try
-		{
-			inventoryItemsDAO=new InventoryItemsAccessDAO();
-			inventoryItemsDAO.deleteDataFromInventoryItemsDAO(connection, p);
-		}
-		catch(Exception e)
-		{
-			log.error("Exception Details: deleteDataFromLoginDetailsBO"+e);
-		}
-	
-	}
-	
-	public List<InventoryItemsModel> getInventoryItemsBySortingAndSearchingBO(Connection connection,SortAndSearchModel o)
-	{
-		List<InventoryItemsModel> list=null;
-		try
-		{
-			inventoryItemsDAO=new InventoryItemsAccessDAO();
-			list=inventoryItemsDAO.getAllInventoryItemsBySortingAndSearchingDAO(connection, o);
-		}
-		catch(Exception e)
-		{
-			log.error("Exception Details: getInventoryItemsBySortingAndSearchingBO"+e);
+			log.error("Exception Details: getAllInventoryItemsFromDetailsBySortAndSearch "+e);
+			throw new BOException("Exception Occured In BO");
+			
 		}
 		return list;
-	} 
+	}
 	
 	
 	
+	public int addItemsToDetails(Connection connection,CreateItemModel p[])  throws BOException
+	{
+		int noOfRecordsPosted=0;
+		try
+		{
+			inventoryItemsDAO=new InventoryItemsDAO();
+			noOfRecordsPosted=inventoryItemsDAO.addItemsToDetails(connection, p);
+			
+		}
+		catch(DAOException daoe)
+		{
+			log.error("Exception Details: addItemsToDetails "+daoe);
+			throw new BOException();
+			
+		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Details: addItemsToDetails "+e);
+			throw new BOException("Exception Occured In BO");
+			
+		}
+		return noOfRecordsPosted;
+		
+	}
+	
+	
+	
+	
+	public int updateItemsInDetails(Connection connection,UpdateItemModel p[]) throws BOException
+	{
+		int noOfRecordsUpdated=0;
+		try
+		{
+			
+			inventoryItemsDAO=new InventoryItemsDAO();
+			noOfRecordsUpdated=inventoryItemsDAO.updateItemsInDetails(connection, p);
+			
+			
+		}
+		catch(DAOException daoe)
+		{
+			log.error("Exception Details: updateItemsInDetails "+daoe);
+			throw new BOException();
+			
+		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Details: updateItemsInDetails"+e);
+			throw new BOException("Exception Occured In BO");
+			
+		}
+		
+		return noOfRecordsUpdated;
+	
+	}
+	
+	
+	
+	public int deleteItemsInDetails(Connection connection,DeleteItemModel d) throws BOException
+	{
+		int noOfRecordsUpdated=0;
+		try
+		{
+			
+			inventoryItemsDAO=new InventoryItemsDAO();
+			noOfRecordsUpdated=inventoryItemsDAO.deleteItemFromDetails(connection, d);
+			
+		}
+		catch(DAOException daoe)
+		{
+			log.error("Exception Details: deleteItemsInDetails "+daoe);
+			throw new BOException();
+			
+		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Details: deleteItemsInDetails "+e);
+			throw new BOException("Exception Occured In BO");
+			
+		}
+		return noOfRecordsUpdated;
+	}
 
 }

@@ -1,0 +1,87 @@
+.modalDialog {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+.modalDialog:target {
+  opacity:1;
+  pointer-events: auto;
+}
+
+.modalDialog > div {
+  width: 350px;
+  height: auto;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999);
+}
+td{
+  padding-top:10px;
+}
+td:first-child{
+  padding-left:10px;
+  font-family: "Ubuntu Light";
+  color: darkgray;
+}
+td:nth-of-type(2){
+  padding-left:20px;
+  font-size: 14px;
+}
+
+input,button,select{
+  padding:6px 10px;
+  width: 200px;
+  color: black;
+  border-radius: 4px;
+  border:0.1px solid black;
+}
+input[type="radio"]{
+  width: 100px;
+}
+button#submit,button#registration-submit{
+  background-color: #008CBA;
+  width: auto;
+  padding: 5px 15px;
+  color: white;
+  font-weight: bold;
+}
+a{
+  text-decoration: none;
+  color: brown;
+  font-weight: bold;
+}
+a.close {
+  float: right;
+  position: absolute;
+  right: -10px;
+  top:-10px;
+  padding: 3px 8px;
+  border-radius: 100%;
+  background-color: #008CBA;
+  color: whitesmoke;
+  border: 0.1px solid black;
+}
+
+td#last{
+  color:darkgray;
+}
+
+fieldset{
+  border-radius: 5px;
+  box-shadow: 10px lightgray;
+}

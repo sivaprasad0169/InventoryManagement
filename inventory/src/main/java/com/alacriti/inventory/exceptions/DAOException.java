@@ -2,11 +2,11 @@ package com.alacriti.inventory.exceptions;
 
 public class DAOException extends Exception{
 	
-	DAOException(String message)
+	public DAOException(String message)
 	{
 		super(message);
 	}
-	DAOException(){
+	public DAOException(){
 		
 	}
 }

@@ -1,0 +1,39 @@
+<div class="sort">
+  <form id="demo-2">
+    <input type="search" placeholder="Search" #msgref (keyup)="SeachText(msgref.value,ref.value,select.value)">
+    <select id="select" #ref (change)="SeachText(msgref.value,ref.value,select.value)">
+      <option value="Item_Name">Item Name</option>
+      <option value="Available_Quantity">Quantity</option>
+    </select>
+    <select #select (click)="SeachText(msgref.value,ref.value,select.value)" id="category">
+      <option value="0">All Categories</option>
+      <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
+    </select>
+
+  </form>
+</div>
+
+<h2>Available Items Details</h2>
+<div class="container">
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Available Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let itemDetails of itemsDetails">
+      <td>{{itemDetails.itemName}}</td>
+      <td>{{itemDetails.availableQuantity}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+  <div *ngIf="itemsDetails==null">
+    <h3>Error:{{getError}}</h3>
+  </div>
+</div>
+
+
