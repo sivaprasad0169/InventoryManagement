@@ -23,6 +23,8 @@ import {UpdateService} from "./update/UpdateService";
 import {DataService} from "./services/data.service";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {CategoryService} from "./services/category.service";
+import {CanActivate} from "@angular/router";
+import {CapitalizePipe} from "./pipes/capitalize.pipe";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {CategoryService} from "./services/category.service";
     HeadComponent,
     RegistrationComponent,
     TestComponent,
-    BodyComponent
+    BodyComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,16 @@ import {CategoryService} from "./services/category.service";
     FooterModule,
     HomeModule
   ],
-  providers: [LoginService,InventoryItemsService,RegisterService,UpdateService,DataService,AuthGuardService,CategoryService],
+  providers:
+    [
+      LoginService,
+      InventoryItemsService,
+      RegisterService,
+      UpdateService,
+      DataService,
+      AuthGuardService,
+      CategoryService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

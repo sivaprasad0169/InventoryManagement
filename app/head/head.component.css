@@ -1,3 +1,5 @@
+
+
 .dropdown ,.log{
   position: fixed;
   top:3%;
@@ -8,20 +10,51 @@
 
 }
 
+
+.logout{
+ position: fixed;
+  top: 1%;
+  right: 0%;
+  height: 10%;
+  width: 15%;
+
+}
+
+img{
+  float: left;
+  width: 40px;
+  height: 40px;
+  alignment: right;
+  position: relative;
+  top: 20%;
+
+}
+
 .logout h4{
-  position: fixed;
-  top:1%;
-  right: 2%;
-  color: whitesmoke;
+  float: left;
+  alignment: right;
+  color: #9f0202;
   font-weight: bold;
+  font-size: 15px;
+
+}
+span#user{
+  color: #FF6600;
   font-size: 18px;
 }
+
+
 .logout a{
   position: fixed;
-  top:2%;
-  right: 2%;
-  color: whitesmoke;
+  top:10%;
+  right: 5%;
+  color: white;
+  opacity: 0.6;
   cursor: pointer;
+}
+
+.logout a:hover{
+  opacity: 1;
 }
 
 .dropdown a,.log a{
@@ -71,12 +104,13 @@ a:link{
   font-size:12px;
   opacity: 0.7;
   alignment: bottom;
-  padding:0px 20px 0px 20px;
+  padding:0px 10px 0px 10px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: whitesmoke;
   font-weight: bold;
-  padding: 10px 40px;
+  padding: 10px 50px;
   background-color: #999999;
+  margin-left: 2px;
 }
 .routers a:hover{
   opacity: 1.0;
@@ -123,5 +157,8 @@ span#title2{
 
 }
 
-
+.title_main{
+  position: relative;
+  left: 4%;
+}
 

@@ -44,7 +44,7 @@ input,button,select{
   width: 200px;
   color: black;
   border-radius: 4px;
-  border:0.1px solid black;
+  border:0.1px solid darkgray;
 }
 input[type="radio"]{
   width: 100px;
@@ -56,6 +56,12 @@ button#submit,button#registration-submit{
   color: white;
   font-weight: bold;
 }
+
+#registration-submit{
+  border: none;
+}
+
+
 a{
   text-decoration: none;
   color: brown;

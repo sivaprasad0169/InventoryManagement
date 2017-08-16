@@ -31,12 +31,11 @@ export class TestComponent{
         .subscribe(data => {
             if ( data.isValid === true)
             {
-              this.dataService.setLang(data.userFullName);
+              this.dataService.setLoggesUser(data.userFullName);
               this.dataService.setIsLogStatus(true);
               this.loggedUser=data.userFullName;
               this.router.navigate(['/home']);
-              alert("Hello "+this.loggedUser+", You have Successfullt logged In");
-
+              localStorage.setItem("user", data.userFullName);
             }
             else
             {

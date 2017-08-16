@@ -30,7 +30,7 @@ td{
   padding-top:10px;
 }
 td:first-child{
-  padding-left:10px;
+  padding-left:5px;
   font-family: "Ubuntu Light";
   color: darkgray;
 }
@@ -44,7 +44,7 @@ input,button,select{
   width: 200px;
   color: black;
   border-radius: 4px;
-  border:0.1px solid black;
+  border:0.1px solid darkgray;
 }
 input[type="radio"]{
   width: 100px;
@@ -56,6 +56,12 @@ button#submit,button#registration-submit{
   color: white;
   font-weight: bold;
 }
+#registration-submit{
+  border: none;
+}
+
+
+
 a{
   text-decoration: none;
   color: brown;
@@ -70,7 +76,7 @@ a.close {
   border-radius: 100%;
   background-color: #008CBA;
   color: whitesmoke;
-  border: 0.1px solid black;
+  border: none;
 }
 
 td#last{
@@ -84,4 +90,29 @@ fieldset{
 
 tr#errorMsg td{
   color: hotpink;
+}
+
+
+
+
+
+
+.danger {
+  color: #9f0202;
+}
+
+.success {
+  background-color: #ddffdd;
+  border-left: 6px solid #4CAF50;
+}
+
+.info {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196F3;
+}
+
+
+.warning {
+  background-color: #ffffcc;
+  border-left: 6px solid #ffeb3b;
 }

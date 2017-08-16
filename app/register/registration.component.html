@@ -10,52 +10,56 @@
 
       <table>
         <tr>
-          <td>First Name </td>
+          <td>First Name <small class="danger">*</small></td>
           <td>
-            <div><input type="text" #fname formControlName="firstName"></div>
+            <div><input type="text" #fname formControlName="firstName" placeholder="First Name"> </div>
             <div *ngIf="registerForm.controls['firstName'].hasError('required')">
-              Please Enter a valid name
+              <small class="danger" [hidden]="registerForm.controls.firstName.valid || (registerForm.controls.firstName.pristine && !registerForm.submitted)">
+                Please Enter a valid name
+              </small>
             </div>
           </td>
         </tr>
         <tr>
           <td>Last Name</td>
-          <td><input type="text" #lname></td>
+          <td><input type="text" #lname placeholder="Last Name"></td>
         </tr>
         <tr>
-          <td>User Name </td>
+          <td>User Name <small class="danger">*</small></td>
           <td>
-            <input type="text" #uname formControlName="userName" placeholder="User Name">
+            <input type="text" #uname formControlName="userName" placeholder="Example1234">
             <div *ngIf="registerForm.controls['userName'].hasError('required')">
-              Please Enter a valid user name
+             <small class="danger" [hidden]="registerForm.controls.userName.valid || (registerForm.controls.userName.pristine && !registerForm.submitted)">
+               Please Enter a valid user name
+             </small>
             </div>
-            <div *ngIf="registerForm.controls['userName'].hasError('pattern')">
-              FirstLetter should be Capital
+            <div *ngIf="registerForm.controls['userName'].hasError('minlength')">
+              <small class="danger">Please Enter atleast 5 charecters</small>
             </div>
           </td>
         </tr>
         <tr>
           <td>Email</td>
-          <td><input type="email" #email></td>
+          <td><input type="email" #email placeholder="example@gmail.com"></td>
         </tr>
         <tr>
-          <td>Password</td>
-          <td><input type="password" #pwd formControlName="password" [(ngModel)]="password"></td>
+          <td>Password<small class="danger">*</small></td>
+          <td><input type="password" #pwd formControlName="password" [(ngModel)]="password" placeholder="Enter Password"> </td>
         </tr>
         <tr>
-          <td>Confirm Password</td>
+          <td>Confirm Password<small class="danger">*</small></td>
           <td>
-            <input type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword" (blur)="checkPasswordMatching()">
-            <small [hidden]="registerForm.controls.confirmPassword.valid || (registerForm.controls.confirmPassword.pristine && !registerForm.submitted)" class="text-danger">
+            <input type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword" (blur)="checkPasswordMatching()" placeholder="Re-Enter Password">
+            <small class="danger" [hidden]="registerForm.controls.confirmPassword.valid || (registerForm.controls.confirmPassword.pristine && !registerForm.submitted)">
               Password mismatch
             </small>
           </td>
         </tr>
 
-        <tr>
+        <!--<tr>
           <td>Upload Photo</td>
           <td><input type="file" accept="image/png" #file></td>
-        </tr>
+        </tr>-->
         <tr id="errorMsg"><td colspan="2">{{errorMsg}}</td></tr>
         <td>Registered..?<a routerLink="/login"> Login </a> </td>
         <td><button id="registration-submit" [disabled]="!registerForm.valid" (click)="onSumbitForm(uname.value,pwd.value,fname.value,lname.value,email.value)">Submit Details</button></td>

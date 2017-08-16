@@ -33,8 +33,8 @@ export class RegistrationComponent implements OnInit{
   {
 
     this.registerForm=this._formBuilder.group({
-      firstName:['FirstName',[Validators.required]],
-      userName:['Example0169',[Validators.required,Validators.pattern('^[A-Z][a-z0-9A-Z]*$')]],
+      firstName:['',[Validators.required]],
+      userName:['',[Validators.required,Validators.minLength(5)]],
       confirmPassword: ['', Validators.compose([
         Validators.required,
 

@@ -5,6 +5,7 @@ import {Params} from "@angular/router"
 import {promise} from "selenium-webdriver";
 import consume = promise.consume;
 import {isNumber} from "util";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector:'employee-details',
@@ -19,17 +20,25 @@ export class UpdateItemComponent implements OnInit{
   public item;
   updateError:string;
 
+  loggedUser:string="Admin";
+
   result:number;
   consumed:number=0;
   purchased:number=0;
 
-  constructor(private updateService:UpdateService,private route:ActivatedRoute,private router:Router){}
+  constructor(private  dataService:DataService,private updateService:UpdateService,private route:ActivatedRoute,private router:Router){}
 
   ngOnInit(){
 
     let id=this.route.snapshot.params['id'];
     this.itemId=id;
 
+
+    this.dataService.loggedUserUpdated.subscribe(
+      (loggedUser) => {
+        this.loggedUser = this.dataService.getLoggedUserName();
+      }
+    );
 
     this.updateService.getItemById(id)
       .subscribe(itemsData=>this.item=itemsData,
@@ -56,7 +65,7 @@ export class UpdateItemComponent implements OnInit{
       updated=parseInt(this.item.availableQuantity)+parseInt(purchase)-parseInt(consumed);
 
       if(updated>=0) {
-        this.updateService.updateItemDetails(ItemId, NewName, purchase, consumed, updated)
+        this.updateService.updateItemDetails(ItemId, NewName, purchase, consumed, updated,this.loggedUser)
           .subscribe(data => {
               if (data !== 0) {
                 this.router.navigate(['/update']);

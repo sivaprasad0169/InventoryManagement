@@ -5,25 +5,34 @@ import {LoginService} from "./login-service";
 
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardService implements CanActivate
+{
+
   private errorMsg;
-  private flag;
+  private isUserLogged;
+
   constructor(private loginService: LoginService, private route: Router) {}
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    this.loginService.checkForSession()
-      .subscribe(data => this.flag = data,
-        dataError => this.errorMsg = dataError);
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+  {
 
-    if (this.flag === true)
-    {
-      console.log(this.flag);
-    }
-
-    else if (this.flag === false) {
-      console.log('this is from authguard : ' + this.flag);
-      this.route.navigate(['/login']);
-    }
-    return this.flag;
+    return new Promise<boolean>((resolve, reject) =>this.loginService.checkForSession()
+      .subscribe(data => {
+          this.isUserLogged = data;
+          if (this.isUserLogged === true)
+          {
+          }
+          else if (this.isUserLogged === false) {
+            this.route.navigate(['/login']);
+          }
+          resolve(true)
+        }
+        ,
+        dataError => {
+          this.errorMsg = dataError;
+          resolve(false)
+        }
+      )
+    )
   }
 }

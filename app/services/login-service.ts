@@ -62,15 +62,30 @@ export class LoginService{
       .map((res:Response)=>res.json());
 
   }
+
   checkForSession() {
-    const _url2 = 'http://localhost:8080/inventory/CheckSession';
+    const _urlCheckSession = 'http://localhost:8080/inventory/CheckSession';
+    const headers = new Headers();
+    headers.append('Content-Type',
+      'text/plain');
+    return this._http.get(_urlCheckSession, { headers: headers, withCredentials: true })
+      .map((response: Response) => response.json())
+
+  }
+
+  removeSession()
+  {
+
+    const _urlremoveSession = 'http://localhost:8080/inventory/removeSession';
     const headers = new Headers();
     headers.append('Content-Type',
       'application/json');
-    return this._http.get(_url2, { headers: headers, withCredentials: true })
+    return this._http.get(_urlremoveSession, { headers: headers, withCredentials: true })
       .map((response: Response) => response.json())
-      //.catch(this._errorHandler);
+
+
   }
+
 
 }
 

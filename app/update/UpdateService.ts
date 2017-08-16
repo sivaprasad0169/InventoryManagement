@@ -57,7 +57,7 @@ export class UpdateService{
 
 
 
-  updateItemDetails(itemId,itemName,purchasedQuantity,consumedQuantity,availableQuantity)
+  updateItemDetails(itemId,itemName,purchasedQuantity,consumedQuantity,availableQuantity,loggedUser)
   {
     let data=[{
       "itemId":itemId,
@@ -65,7 +65,7 @@ export class UpdateService{
       "purchasedQuantity":purchasedQuantity,
       "consumedQuantity":consumedQuantity,
       "itemUpdatedQuantity":availableQuantity,
-      "updatedBy":"SivaPrasad"
+      "updatedBy":localStorage.getItem("user")
     }]
     var headers=new Headers();
     headers.append('Content-Type',
@@ -77,12 +77,12 @@ export class UpdateService{
 
 
 
-  addNewItem(itemName,quantity,selected)
+  addNewItem(itemName,quantity,selected,loggedUser)
   {
     let data=[{
       "itemName":itemName,
       "itemQuantity":quantity,
-      "updatedBy":"SivaPrasad",
+      "updatedBy":localStorage.getItem("user"),
       "categoryId":selected
     }]
     var headers=new Headers();

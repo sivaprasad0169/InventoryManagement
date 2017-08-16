@@ -1,9 +1,11 @@
 
 <div class="container">
     <div class="title">
+      <div class="title_main">
       <pre>
-        <p id="title1">{{title1}}<span id="title2">{{title2}}</span></p>
+      <br> <img src="../assets/shopping-bag.png">  <p id="title1"> {{title1}}<span id="title2">{{title2}}</span></p>
       </pre>
+    </div>
       <div *ngIf="!isLoggedIn"  class="log">
 
         <a routerLink="login">Login</a>
@@ -12,17 +14,18 @@
 
       </div>
       <div *ngIf="isLoggedIn" class="logout">
-        <h4>Hello {{loggedUser}}..!</h4>
+        <img src="../assets/149071.png"> <h4><span id="user">&nbsp;  {{loggedUser | capitalize}}</span></h4>
+
         <a (click)="onLogOutClick()">Log Out</a>
       </div>
 
     </div>
    <div class="routers">
       <nav >
-        <a routerLink="/home" id="home">Home</a>
-        <a routerLink="/available">Availble Items</a>
-        <a routerLink="/update"> Update Items</a>
-        <a routerLink="/details">Details</a>
+        <a routerLink="/home" id="home"> Home </a>
+        <a routerLink="/available"> Availble </a>
+        <a routerLink="/update"> Update </a>
+        <a routerLink="/details"> Details </a>
       </nav>
    </div>
 

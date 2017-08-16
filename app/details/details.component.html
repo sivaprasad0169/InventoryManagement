@@ -69,7 +69,7 @@
         <tr>
           <th>Operation Type</th>
           <th>Quantity</th>
-          <th>Available</th>
+         <th>Available</th>
           <th>Date</th>
           <th>Time</th>
           <th>Updated By</th>
@@ -78,7 +78,7 @@
         <tr *ngFor="let itemDetail of itemDetails">
           <td>{{itemDetail.operationType}}</td>
           <td>{{itemDetail.updatedQuantity}}</td>
-          <td>{{itemDetail.availableQuantity}}</td>
+         <td>{{itemDetail.availableQuantity}}</td>
           <td>{{itemDetail.updatedDate | date:'shortDate'}}</td>
           <td>{{itemDetail.updatedDate | date:'shortTime'}}</td>
           <td>{{itemDetail.updatedBy}}</td>

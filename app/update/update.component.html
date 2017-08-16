@@ -26,7 +26,7 @@
 
 <div *ngIf="addItemFlag" class="add_details">
   <form [formGroup]="userForm" *ngIf="selectCategoryFlag">
-    <table>
+    <table class="AddItems">
     <tr>
       <td>
         <label>Item Name</label>
@@ -48,38 +48,21 @@
         </div>
       </td>
     </tr>
-      <!--<tr >
-        <td>Category</td>
 
-
-
-        <td *ngIf="selectCategoryFlag">
-              <select #selected (click)="onselect(selected.value)">
-                <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
-              </select>
-              <small (click)="changeAddCategoryFlag()">Add Category</small>
-        </td>
-
-
-        <td *ngIf="addCategoryFlag">
-          <input type="text" #category>
-          <small (click)="changeAddCategoryFlag()">Select Category</small>
-        </td>
-      </tr>-->
     <tr>
       <td>Category</td>
       <td>
       <select #selected>
         <option [value]="category.categoryId"  *ngFor="let category of categories">{{category.categoryName}}</option>
-      </select>
-      <small (click)="changeAddCategoryFlag()"> Add Category</small>
+      </select><br>
+      <small (click)="changeAddCategoryFlag()" id="add_new_category"> Add New Category</small>
     </td>
   </tr>
     <tr>
+      <td></td>
       <td>
         <button [disabled]="!userForm.valid" class="edit" (click)="AddItemDetails(itemName.value,quantity.value,selected.value)">Add</button>
-      </td>
-      <td>
+
         <button class="remove" (click)="onCancelItem()">Cancel</button>
       </td>
     </tr>
@@ -91,8 +74,9 @@
     <div *ngIf="categoryForm.controls['categoryName'].hasError('required')">
       Please Enter a valid name
     </div><br>
-    <button (click)="addCategory(addCategoryName.value)">Add</button>
-    <button (click)="changeAddCategoryFlag()">Back</button>
+    <button (click)="addCategory(addCategoryName.value)" class="edit">Add</button>
+    <button (click)="changeAddCategoryFlag()" class="edit">Back</button>
+    <br>
     <p>{{addCategoryError}}</p>
   </form>
 </div>

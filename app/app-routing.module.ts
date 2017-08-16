@@ -18,7 +18,7 @@ const routes:Routes=[
   {path:'details',component:DetailsComponent},
   {path:'login',component:TestComponent},
   {path:'register',component:RegistrationComponent},
-  {path:'update/:id',component:UpdateItemComponent}
+  {path:'update/:id',canActivate:[AuthGuardService],component:UpdateItemComponent}
 
 ];
 @NgModule({

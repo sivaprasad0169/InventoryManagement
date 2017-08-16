@@ -6,6 +6,7 @@ import {InventoryItemsService} from "../services/inventory-items.service";
 import {Validators} from "@angular/forms";
 import {FormGroup,FormBuilder} from "@angular/forms";
 import {CategoryService} from "../services/category.service";
+import {DataService} from "../services/data.service";
 
 @Component({
   templateUrl:'./update.component.html',
@@ -13,6 +14,8 @@ import {CategoryService} from "../services/category.service";
 })
 
 export class UpdateComponent implements OnInit{
+
+  loggedUser:string="Admin";
 
   userForm:FormGroup;
   categoryForm:FormGroup;
@@ -34,7 +37,7 @@ export class UpdateComponent implements OnInit{
   categories=[];
   categoryError:string;
 
-  constructor(private _formBuilder:FormBuilder,private updateService:UpdateService,private router:Router,private inventoryItems:InventoryItemsService,private  _categoryService:CategoryService){}
+  constructor(private  dataService:DataService,private _formBuilder:FormBuilder,private updateService:UpdateService,private router:Router,private inventoryItems:InventoryItemsService,private  _categoryService:CategoryService){}
 
   ngOnInit(){
 
@@ -46,6 +49,13 @@ export class UpdateComponent implements OnInit{
     this._categoryService.getAllCategories()
       .subscribe(responseData=>this.categories=responseData,
         resError=>this.categoryError=resError);
+
+    this.dataService.loggedUserUpdated.subscribe(
+      (loggedUser) => {
+        this.loggedUser = this.dataService.getLoggedUserName();
+      }
+    );
+
 
     this.userForm=this._formBuilder.group({
       itemName:['New Item',[Validators.required]],
@@ -81,7 +91,7 @@ export class UpdateComponent implements OnInit{
   {
 
       console.log(name, quantity,selected);
-      this.updateService.addNewItem(name, quantity,selected)
+      this.updateService.addNewItem(name, quantity,selected,this.loggedUser)
         .subscribe(data => {
             if (data !== 0) {
               alert("Item posted SuccessFully ");

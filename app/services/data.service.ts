@@ -11,12 +11,12 @@ export class DataService{
    public loggedUser:string;
    public isLoggeIn:boolean;
 
-  langUpdated:EventEmitter<string> = new EventEmitter<string>();
+  loggedUserUpdated:EventEmitter<string> = new EventEmitter<string>();
   isLoggedInUpdated:EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  setLang(lang) {
+  setLoggesUser(lang) {
     this.loggedUser = lang;
-    this.langUpdated.emit(this.loggedUser);
+    this.loggedUserUpdated.emit(this.loggedUser);
   }
   setIsLogStatus(value:boolean)
   {
@@ -30,7 +30,7 @@ export class DataService{
     return this.isLoggeIn;
   }
 
-  getLang() {
+  getLoggedUserName() {
     return this.loggedUser;
   }
 
