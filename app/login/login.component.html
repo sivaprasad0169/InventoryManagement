@@ -1,0 +1,30 @@
+
+
+
+<div id="login" class="modalDialog">
+
+
+  <div>
+
+    <a routerLink="/home" title="Close" class="close"> x </a>
+    <table>
+      <caption>Login Form</caption><br><br>
+      <tr><td>User Name</td><td><input type="text" placeholder="Your User Name Here.." #userName></td> </tr>
+
+      <tr><td>Password </td><td><input type="password" placeholder="Password.." #password></td></tr>
+      <br>
+      <tr id="errorMsg"><td colspan="2">{{error}}</td></tr>
+      <br>
+      <tr><td> <button (click)="ValidateData(userName.value,password.value);userName.value='';password.value='';" id="submit">Submit</button></td>
+        <td id="last">Not Registered..?<a routerLink="/register">  Register</a> </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+
+

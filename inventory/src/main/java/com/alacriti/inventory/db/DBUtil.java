@@ -6,28 +6,41 @@ import java.sql.SQLException;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 public class DBUtil {
+	
+	
+	public static final Logger log= Logger.getLogger(DBUtil.class);
 	
 	public static void closeConnection(Connection conn,boolean isError)
 	{
 		if(isError)
 		{
-			rollback(conn);
+			rollbackChanges(conn);
+			log.info("Changes rolled Back");
 		}
 		else
-			commit(conn);
-		close(conn);	
+		{
+			commitChanges(conn);
+			log.info("Changes Committed");
+		}
+		closeConnection(conn);	
 		
 	}
 	
 	
-	public static void close(Connection connection)
+	public static void closeConnection(Connection connection)
 	{
 		if (connection != null) {
-			try {
+			try 
+			{
 				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+				log.info("Connection Closed.");
+			} 
+			catch (SQLException e)
+			{
+				log.error("Exception Occured while closing Connection :"+e);
 			}
 		}
 		
@@ -37,42 +50,56 @@ public class DBUtil {
 	{
 		DataSource dataSource = null;
 		Connection connection = null;
-		try {
+		try
+		{
 			
 			dataSource = (DataSource) new InitialContext()
 					.lookup("java:jboss/datasources/TRAINEEE");
 			
 			connection = dataSource.getConnection();
 			connection.setAutoCommit(false);
+			log.info("Connection Created...");
 			
-		}catch(Exception e){
-			System.out.println("Excetion Details  :"+e.getMessage());
 		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Occured while creating Connection :"+e);
+			
+		}
+		
 		return connection;
 	}
 	
 	
 	
-	public static  void rollback(Connection connection)
+	public static  void rollbackChanges(Connection connection)
 	{
-		try {
+		try
+		{
 			connection.rollback();
-		} catch (SQLException e) {
 			
-			e.printStackTrace();
+		} 
+		catch (SQLException e)
+		{
+			
+			log.error("Exception Occured while rollingBack changes :"+e);
 		}
 	}
 	
 	
 	
 	
-	public static  void commit(Connection connection)
+	public static  void commitChanges(Connection connection)
 	{
-		try {
+		try 
+		{
 			connection.commit();
-		} catch (SQLException e) {
 			
-			e.printStackTrace();
+		} 
+		catch (SQLException e) 
+		{
+			log.error("Exception Occured while Committing Changes :"+e);
 		}
 	}
 

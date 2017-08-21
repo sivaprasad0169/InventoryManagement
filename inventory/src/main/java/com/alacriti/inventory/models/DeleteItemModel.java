@@ -3,8 +3,9 @@ package com.alacriti.inventory.models;
 public class DeleteItemModel {
 	
 	public int itemId;
-	public DeleteItemModel() {
-		// TODO Auto-generated constructor stub
+	public DeleteItemModel()
+	{
+		
 	}
 	public DeleteItemModel(int itemId) {
 		super();

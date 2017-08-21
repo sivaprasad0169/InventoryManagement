@@ -52,14 +52,14 @@ public class RegistrationDetailsDAO {
 				catch(SQLException sqle)
 				{
 					
-					log.error(" SQL Exception Details ::getAllInventoryItemsDAO"+sqle);
+					log.error(" SQL Exception Details ::addRegistraionDetails "+sqle);
 					throw new DAOException("Exception Occured In DAO");
 					
 				}
 				catch (Exception e) 
 				{
 					
-					log.error("Ecxeption Details  :addDataToLoginDetailsDAO"+e);
+					log.error("Ecxeption Details  :addRegistraionDetails "+e);
 					throw new DAOException("Exception Occured In DAO");
 					
 					
@@ -113,6 +113,7 @@ public class RegistrationDetailsDAO {
 				throw new DAOException("Exception Occured In DAO");
 				
 			} 
+			
 			return list;
 			
 		}

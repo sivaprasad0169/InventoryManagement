@@ -25,12 +25,14 @@ public class RegistrationDetailsBO {
 		List<RegistrationDetailsModel> list=null;
 		try
 		{
+			
 			userDAO=new RegistrationDetailsDAO();
 			list=userDAO.getAllRegistrationDetails(connection);
 			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception details :getAllRegistrationDetails :"+daoe);
 			throw new BOException();
 			
@@ -60,6 +62,7 @@ public class RegistrationDetailsBO {
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception details :addRegistrationDetails :"+daoe);
 			throw new BOException();
 			
@@ -89,6 +92,7 @@ public class RegistrationDetailsBO {
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception details :updateRegistrationDetails :"+daoe);
 			throw new BOException();
 			
@@ -100,6 +104,7 @@ public class RegistrationDetailsBO {
 			throw new BOException("Exception Occured In BO");
 			
 		}
+		
 		return noOfRecordsUpdated;
 	}
 	
@@ -117,6 +122,7 @@ public class RegistrationDetailsBO {
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception details :removeRegistrationDetails :"+daoe);
 			throw new BOException();
 			
@@ -124,7 +130,7 @@ public class RegistrationDetailsBO {
 		catch(Exception e)
 		{
 			
-			log.error("Exception details :deleteDataFromLoginDetailsBO :"+e);
+			log.error("Exception details :removeRegistrationDetails :"+e);
 			throw new BOException("Exception Occured In BO");
 			
 		}

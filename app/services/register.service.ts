@@ -12,7 +12,8 @@ import {post} from "selenium-webdriver/http";
 export class RegisterService{
 
 
-  private  _urlRegDetailsPost:string="http://localhost:8080/inventory/LoginDetails/PostRegDetails";
+  private  _urlRegDetailsPost:string="http://192.168.35.68:8080/inventory/LoginDetails/PostRegDetails";
+  private  _urlcheckAvailability:string="http://192.168.35.68:8080/inventory/CheckUserName";
 
   constructor(private _http:Http){}
 
@@ -32,6 +33,20 @@ export class RegisterService{
 
 
   }
+
+  checkUserNameAvailability(userName)
+  {
+
+    let postData=userName;
+    var headers=new Headers();
+    headers.append('Content-Type',
+      'application/json');
+
+    return this._http.post(this._urlcheckAvailability,postData)
+      .map((res:Response)=>res.json());
+
+  }
+
 
 
 }

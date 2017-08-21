@@ -26,19 +26,26 @@ public class InventoryItemBO {
 		AvailableItemsModel model=null;
 		try
 		{
+			
 			inventoryItemDAO=new InventoryItemDAO();
 			model=inventoryItemDAO.getInventoryItemByID(connection, itemId);
+			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception Detials: getInventoryItemDetailsByIdBO "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
+			
 			log.error("Exception Detials: getInventoryItemDetailsByIdBO "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
+		
 		return model;
 	}
 	
@@ -49,21 +56,27 @@ public class InventoryItemBO {
 	public List<ItemDetailsModel> getInventoryItemDetails(Connection connection,String itemId) throws BOException
 	{
 		List<ItemDetailsModel> list=null;
+		
 		try
 		{
+			
 			inventoryItemDAO=new InventoryItemDAO();
 			list=inventoryItemDAO.getInventoryItemDetails(connection, itemId);
 			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception Detials: getInventoryItemDetailsByIdBO "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
+			
 			log.error("ExceptionDetails : getInventoryItemDetailsBO"+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		return list;
 	}
@@ -81,13 +94,17 @@ public class InventoryItemBO {
 		}
 		catch(DAOException daoe)
 		{
-			log.error("Exception Detials: getInventoryItemDetailsByIdBO "+daoe);
+			
+			log.error("Exception Detials: getInventoryItemPurchaseDetails  "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
-			log.error("Exception Details: getInventoryItemPurchaseDetailsBO "+e);
+			
+			log.error("Exception Details: getInventoryItemPurchaseDetails  "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		return list;
 	}
@@ -104,13 +121,17 @@ public class InventoryItemBO {
 		}
 		catch(DAOException daoe)
 		{
-			log.error("Exception Detials: getInventoryItemDetailsByIdBO "+daoe);
+			
+			log.error("Exception Detials: getInventoryItemConsumeDetails "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
-			log.error("Exception Details: getInventoryItemConsumeDetailsBO "+e);
+			
+			log.error("Exception Details: getInventoryItemConsumeDetails "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		return list;
 	}

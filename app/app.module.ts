@@ -17,7 +17,7 @@ import {UpdateModule} from "./update/update.module";
 import {AvailableModule} from "./available/available.module";
 import {FooterModule} from "./footer/footer.module";
 import {HomeModule} from "./home/home.module";
-import {TestComponent} from "./login/test.component";
+import {TestComponent} from "./login/login.component";
 import {RegisterService} from "./services/register.service";
 import {UpdateService} from "./update/UpdateService";
 import {DataService} from "./services/data.service";

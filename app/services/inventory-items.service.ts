@@ -10,11 +10,11 @@ import 'rxjs/add/observable/throw';
 
 export class InventoryItemsService {
 
-  private _urlget: string = "http://localhost:8080/inventory/InventoryItems/get";
-  private _urlgetBysort:string="http://localhost:8080/inventory/InventoryItems/getItemsBySortingAndSearching";
-  private _urlgetDetails:string="http://localhost:8080/inventory/InventoryItem/GetItemDetails";
-  private _urlgetPurchaseDetails:string="http://localhost:8080/inventory/InventoryItem/GetItemPurchaseDetails";
-  private _urlgetConsumeDetails:string="http://localhost:8080/inventory/InventoryItem/GetItemConsumeDetails";
+  private _urlget: string = "http://192.168.35.68:8080/inventory/InventoryItems/get";
+  private _urlgetBysort:string="http://192.168.35.68:8080/inventory/InventoryItems/getItemsBySortingAndSearching";
+  private _urlgetDetails:string="http://192.168.35.68:8080/inventory/InventoryItem/GetItemDetails";
+  private _urlgetPurchaseDetails:string="http://192.168.35.68:8080/inventory/InventoryItem/GetItemPurchaseDetails";
+  private _urlgetConsumeDetails:string="http://192.168.35.68:8080/inventory/InventoryItem/GetItemConsumeDetails";
   constructor(private _http: Http) {
   }
 

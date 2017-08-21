@@ -135,6 +135,7 @@ public class RegistrationDetailsDelegate {
 				{
 					
 					DBUtil.closeConnection(connection,isError);
+					
 				}
 				return noOfRecordsEffected;
 		}

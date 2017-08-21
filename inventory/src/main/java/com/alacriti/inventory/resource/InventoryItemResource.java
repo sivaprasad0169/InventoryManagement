@@ -30,7 +30,7 @@ public class InventoryItemResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public AvailableItemsModel getItemDetailsById(String itemId)
 	{
-		log.debug("DEBUG getAllInventoryItems " );
+		log.debug(" Getting Inventory Item Details By Its Id... " );
 		
 		return inventoryItemDelegate.getInventoryItemDetailsById(itemId);
 	}
@@ -44,8 +44,7 @@ public class InventoryItemResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public List<ItemDetailsModel> getItemDetails(String itemId)
 	{
-		log.debug("DEBUG getAllInventoryItems " );
-		
+		log.debug(" Getting Inventory Item Full Details... " );
 		return inventoryItemDelegate.getInventoryItemDetails(itemId);
 	}
 	
@@ -55,7 +54,7 @@ public class InventoryItemResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public List<ItemDetailsModel> getItemPurchaseDetails(String itemId)
 	{
-		log.debug("DEBUG getAllInventoryItems " );
+		log.debug(" Getting Inventory Item Purchase Details... " );
 		
 		return inventoryItemDelegate.getInventoryItemPurchaseDetails(itemId);
 	}
@@ -67,7 +66,7 @@ public class InventoryItemResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public List<ItemDetailsModel> getItemConsumeDetails(String itemId)
 	{
-		log.debug("DEBUG getAllInventoryItems " );
+		log.debug(" Getting Inventory Item Consume Details... " );
 		
 		return inventoryItemDelegate.getInventoryItemConsumesDetails(itemId);
 	}

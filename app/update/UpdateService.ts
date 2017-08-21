@@ -9,12 +9,12 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 
 export class UpdateService{
-  private  _url:string="http://localhost:8080/inventory/InventoryItems/get";
-  private _urlDelete:string="http://localhost:8080/inventory/InventoryItems/delete";
-  private _urlUpdate:string="http://localhost:8080/inventory/InventoryItems/update";
-  private _urlPost:string="http://localhost:8080/inventory/InventoryItems/post";
-  private _urlItemById:string="http://localhost:8080/inventory/InventoryItem/GetItemDetailsById";
-
+  private  _url:string="http://192.168.35.68:8080/inventory/InventoryItems/get";
+  private _urlDelete:string="http://192.168.35.68:8080/inventory/InventoryItems/delete";
+  private _urlUpdate:string="http://192.168.35.68:8080/inventory/InventoryItems/update";
+  private _urlPost:string="http://192.168.35.68:8080/inventory/InventoryItems/post";
+  private _urlItemById:string="http://192.168.35.68:8080/inventory/InventoryItem/GetItemDetailsById";
+  private  _urlcheckAvailability:string="http://192.168.35.68:8080/inventory/checkItemName";
   constructor(private _http:Http){}
 
   getAllItems()
@@ -92,6 +92,18 @@ export class UpdateService{
     return this._http.post(this._urlPost,data)
       .map((res:Response)=>res.json());
 
+
+  }
+  checkItemNameAvailability(itemName)
+  {
+
+    let postData=itemName;
+    var headers=new Headers();
+    headers.append('Content-Type',
+      'application/json');
+
+    return this._http.post(this._urlcheckAvailability,postData)
+      .map((res:Response)=>res.json());
 
   }
 

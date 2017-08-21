@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {HttpModule} from "@angular/http";
-import {TestComponent} from "./test.component";
+import {TestComponent} from "./login.component";
 
 
 

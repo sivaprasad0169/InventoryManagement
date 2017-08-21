@@ -12,8 +12,8 @@ import {post} from "selenium-webdriver/http";
 export class LoginService{
 
   private  _urlGet:string="";
-  private  _urlRegDetailsPost:string="http://localhost:8080/inventory/LoginDetails/PostRegDetails";
-  private  _urlValidate:string="http://localhost:8080/inventory/Validate";
+  private  _urlRegDetailsPost:string="http://192.168.35.68:8080/inventory/LoginDetails/PostRegDetails";
+  private  _urlValidate:string="http://192.168.35.68:8080/inventory/Validate";
 
   constructor(private _http:Http){}
 
@@ -64,7 +64,7 @@ export class LoginService{
   }
 
   checkForSession() {
-    const _urlCheckSession = 'http://localhost:8080/inventory/CheckSession';
+    const _urlCheckSession = 'http://192.168.35.68:8080/inventory/CheckSession';
     const headers = new Headers();
     headers.append('Content-Type',
       'text/plain');
@@ -76,7 +76,7 @@ export class LoginService{
   removeSession()
   {
 
-    const _urlremoveSession = 'http://localhost:8080/inventory/removeSession';
+    const _urlremoveSession = 'http://192.168.35.68:8080/inventory/removeSession';
     const headers = new Headers();
     headers.append('Content-Type',
       'application/json');

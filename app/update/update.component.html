@@ -31,10 +31,15 @@
       <td>
         <label>Item Name</label>
       </td>
-      <td><input type="text"placeholder="Item Name" formControlName="itemName" #itemName>
+      <td><input type="text"placeholder="Item Name" formControlName="itemName" #itemName (blur)="checkItemNameAvailability(itemName.value)">
           <div *ngIf="userForm.controls['itemName'].hasError('required')">
-            Please Enter a valid name
+            <small [hidden]="userForm.controls.itemName.valid || (userForm.controls.itemName.pristine && !userForm.submitted)">
+              Please Enter a valid name
+            </small>
            </div>
+           <div *ngIf="isItemNameExisted">
+              <small>Item Name Already Existed.</small>
+          </div>
      </td>
     </tr>
     <tr>

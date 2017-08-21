@@ -27,6 +27,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<CategoriesModel> getAllCategories()
 	{
+		log.debug("Getting All Categories");
 		return categoryDelegate.getAllCategories();
 	}
 	
@@ -36,6 +37,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public CategoriesModel getACategoryId(String categoryName)
 	{
+		log.debug("Getting Category by Id ");
 		return categoryDelegate.getCategoryId(categoryName);
 		
 	}
@@ -46,6 +48,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<CategoriesModel> addCategory(String categoryName)
 	{
+		log.debug("Adding a Category ");
 		categoryDelegate.addCategory(categoryName);
 		return categoryDelegate.getAllCategories();
 		

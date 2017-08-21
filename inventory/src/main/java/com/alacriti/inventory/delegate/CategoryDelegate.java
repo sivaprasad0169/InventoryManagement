@@ -33,13 +33,13 @@ public class CategoryDelegate {
 				
 				log.error("Exception Details : getAllCategories "+e);
 				isError=true;
-				
-				
+								
 			} 
 			finally 
 			{
 				
 				DBUtil.closeConnection(connection,isError);
+				
 			}
 			return list;
 	}
@@ -97,6 +97,7 @@ public class CategoryDelegate {
 			{
 				
 				DBUtil.closeConnection(connection,isError);
+				
 			}
 			return noOfRecordsEffected;
 	}

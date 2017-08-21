@@ -30,7 +30,7 @@ public class RegistrationDetailsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<RegistrationDetailsModel> getAllUserDetails()
 	{
-		log.debug("DEBUG getAllInventoryItems " );
+		log.debug("Getting All User Details... " );
 		
 		return loginDetailsDelegate.getAllRegistrationDetails();
 	}
@@ -41,7 +41,7 @@ public class RegistrationDetailsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<RegistrationDetailsModel> updateUserDetails(RegistrationDetailsModel p[])
 	{
-		log.debug("DEBUG updateUserDetails " );
+		log.debug("Updating  UserDetails... " );
 		
 		loginDetailsDelegate.updateDataToTableLoginDetails(p);
 		return loginDetailsDelegate.getAllRegistrationDetails();
@@ -53,7 +53,7 @@ public class RegistrationDetailsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public int postUserDetails(RegistrationDetailsModel p[])
 	{
-		log.debug("DEBUG postUserDetails " );
+		log.debug("Posting User Details... " );
 		
 		return loginDetailsDelegate.addRegistrationDetails(p);
 	
@@ -65,7 +65,7 @@ public class RegistrationDetailsResource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public List<RegistrationDetailsModel> deleteUserDetails(String str)
 	{
-		log.debug("DEBUG deleteUserDetails " );
+		log.debug("Removing User Details... " );
 		
 		loginDetailsDelegate.deleteDataFromTableLoginDetails(str);
 		return loginDetailsDelegate.getAllRegistrationDetails();
@@ -78,7 +78,7 @@ public class RegistrationDetailsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public int PostRegDetails(RegistrationDetailsModel p[])
 	{
-		log.debug("DEBUG postUserDetails " );
+		log.debug("Posting Registration Details... " );
 		
 		return loginDetailsDelegate.addRegistrationDetails(p);
 	}

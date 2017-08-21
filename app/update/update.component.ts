@@ -30,6 +30,8 @@ export class UpdateComponent implements OnInit{
   addItemFlag:boolean=false;
   availableitemsFlag:boolean=true;
 
+  isItemNameExisted:boolean=false;
+
 
   addCategoryFlag=false;
   selectCategoryFlag=true;
@@ -58,7 +60,7 @@ export class UpdateComponent implements OnInit{
 
 
     this.userForm=this._formBuilder.group({
-      itemName:['New Item',[Validators.required]],
+      itemName:['',[Validators.required]],
       quantity:['0',[Validators.required]]
 
 
@@ -173,6 +175,24 @@ export class UpdateComponent implements OnInit{
 
   }
 
+
+  checkItemNameAvailability(itemName)
+  {
+
+    this.updateService.checkItemNameAvailability(itemName)
+      .subscribe(data => {
+          if (data === true) {
+            console.log(data);
+            this.isItemNameExisted = data;
+
+          }
+          else {
+            this.isItemNameExisted = false;
+          }
+        },
+        dataError => this.postError = dataError);
+
+  }
 
 
 

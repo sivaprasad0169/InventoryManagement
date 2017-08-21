@@ -34,7 +34,6 @@ public class InventoryItemDelegate {
 			
 			log.error("Exception Details : getAllDataFromInventoryItemsTable"+e);
 			isError=true;
-			return model;
 			
 		} 
 		finally 
@@ -68,7 +67,6 @@ public class InventoryItemDelegate {
 			
 			log.error("Exception Details : getAllDataFromInventoryItemsTable"+e);
 			isError=true;
-			return list;
 			
 		} 
 		finally 
@@ -99,7 +97,6 @@ public class InventoryItemDelegate {
 			
 			log.error("Exception Details : getAllDataFromInventoryItemsTable"+e);
 			isError=true;
-			return list;
 			
 		} 
 		finally 
@@ -129,7 +126,6 @@ public class InventoryItemDelegate {
 			
 			log.error("Exception Details : getAllDataFromInventoryItemsTable"+e);
 			isError=true;
-			return list;
 			
 		} 
 		finally 

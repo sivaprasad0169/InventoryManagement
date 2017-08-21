@@ -98,7 +98,7 @@ public class InventoryItemsDelegate {
 			catch (Exception e) 
 			{
 				
-				log.error("Exception Details : deleteDataFromTableInventoryItems"+e);
+				log.error("Exception Details : deleteItemsInDetails"+e);
 				isError=true;
 				
 				
@@ -128,7 +128,7 @@ public class InventoryItemsDelegate {
 		catch (Exception e) 
 		{
 			
-			log.error("Exception Details : deleteDataFromTableInventoryItems"+e);
+			log.error("Exception Details : getAllInventoryItemsBySortAndSearch"+e);
 			isError=true;
 			
 			
@@ -140,6 +140,9 @@ public class InventoryItemsDelegate {
 		}
 		return list;
 	}
+	
+	
+	
 	public List<AvailableItemsModel> getAllInventoryItems()
 	{
 		List<AvailableItemsModel> list=null;

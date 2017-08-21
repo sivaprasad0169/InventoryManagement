@@ -27,7 +27,7 @@
         <tr>
           <td>User Name <small class="danger">*</small></td>
           <td>
-            <input type="text" #uname formControlName="userName" placeholder="Example1234">
+            <input type="text" #uname formControlName="userName" placeholder="Example1234" (blur)="checkAvailability(uname.value)">
             <div *ngIf="registerForm.controls['userName'].hasError('required')">
              <small class="danger" [hidden]="registerForm.controls.userName.valid || (registerForm.controls.userName.pristine && !registerForm.submitted)">
                Please Enter a valid user name
@@ -35,6 +35,9 @@
             </div>
             <div *ngIf="registerForm.controls['userName'].hasError('minlength')">
               <small class="danger">Please Enter atleast 5 charecters</small>
+            </div>
+            <div *ngIf="isUserNameExisted">
+              <small class="danger">User Name Already Existed.</small>
             </div>
           </td>
         </tr>
@@ -61,8 +64,9 @@
           <td><input type="file" accept="image/png" #file></td>
         </tr>-->
         <tr id="errorMsg"><td colspan="2">{{errorMsg}}</td></tr>
+        <tr ><td colspan="2" ><small class="danger">{{formNotValidMessage}}</small></td></tr>
         <td>Registered..?<a routerLink="/login"> Login </a> </td>
-        <td><button id="registration-submit" [disabled]="!registerForm.valid" (click)="onSumbitForm(uname.value,pwd.value,fname.value,lname.value,email.value)">Submit Details</button></td>
+        <td><button id="registration-submit"  (click)="onSumbitForm(uname.value,pwd.value,fname.value,lname.value,email.value)">Submit Details</button></td>
       </table>
     </form>
   </div>

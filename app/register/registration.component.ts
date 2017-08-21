@@ -26,6 +26,11 @@ export class RegistrationComponent implements OnInit{
   password;
   confirmPassword;
 
+  isUserNameExisted:boolean;
+
+  formNotValidFlag=false;
+  formNotValidMessage:string;
+
   constructor(private  _formBuilder:FormBuilder,private  dataService:DataService,private registerService:RegisterService,private router:Router){}
 
 
@@ -53,21 +58,26 @@ export class RegistrationComponent implements OnInit{
   onSumbitForm(uname,pwd,fname,lname,email){
     console.log(this.dataService.loggedUser);
 
-    this.registerService.postUserRegistrationData(uname,pwd,fname,lname,email)
-      .subscribe(data => {
-          if ( data !== 0)
-          {
-            this.router.navigate(['/login']);
-            alert("You have Successfullt Registered ");
+    if(this.registerForm.valid) {
 
-          }
-          else
-          {
-            this.errorMsg="Unable Register Your Details !";
-          }
-        },
-        dataError => this.postError = dataError);
+      this.registerService.postUserRegistrationData(uname, pwd, fname, lname, email)
+        .subscribe(data => {
+            if (data !== 0) {
+              this.router.navigate(['/login']);
+              alert("You have Successfullt Registered ");
 
+            }
+            else {
+              this.errorMsg = "Unable Register Your Details !";
+            }
+          },
+          dataError => this.postError = dataError);
+    }
+    else{
+      this.formNotValidFlag=true;
+      this.formNotValidMessage="All * fields should be filled";
+
+    }
 
 
 
@@ -79,6 +89,26 @@ export class RegistrationComponent implements OnInit{
     {
       this.confirmPassword='';
     }
+  }
+
+  checkAvailability(userName)
+  {
+    console.log("entered",userName);
+    if(userName.length>5) {
+      this.registerService.checkUserNameAvailability(userName)
+        .subscribe(data => {
+            if (data === true) {
+              console.log(data);
+              this.isUserNameExisted = data;
+
+            }
+            else {
+              this.isUserNameExisted = false;
+            }
+          },
+          dataError => this.postError = dataError);
+    }
+
   }
 
 

@@ -11,9 +11,9 @@ import 'rxjs/add/observable/throw';
 export class CategoryService{
 
 
-  public  _urlGetCategories:string="http://localhost:8080/inventory/Categories/get";
-  public  _urlGetCategoryId:string="http://localhost:8080/inventory/Categories/getCategoryId";
-  public _urlAddCategory:string="http://localhost:8080/inventory/Categories/addCategory";
+  public  _urlGetCategories:string="http://192.168.35.68:8080/inventory/Categories/get";
+  public  _urlGetCategoryId:string="http://192.168.35.68:8080/inventory/Categories/getCategoryId";
+  public _urlAddCategory:string="http://192.168.35.68:8080/inventory/Categories/addCategory";
   constructor(private _http: Http) {
   }
 

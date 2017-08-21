@@ -29,18 +29,24 @@ public class CategoryBO {
 		
 		try
 		{
+			
 			categoryDAO=new CategoryDAO();
 			list=categoryDAO.getAllCategories(connection);
+			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception Detials: getAllCategories  "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
+			
 			log.error("Exception Detials: getAllCategories  "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		
 		return list;
@@ -57,19 +63,24 @@ public class CategoryBO {
 		CategoriesModel model=null;
 		try
 		{
+			
 			categoryDAO=new CategoryDAO();
 			model=categoryDAO.getCategoryId(connection, categoryName);
 			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception Detials: getCategoryId  "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
+			
 			log.error("Exception Detials: getCategoryId  "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		return model;
 		
@@ -84,19 +95,24 @@ public class CategoryBO {
 		int noOfRecordsEffected=0;
 		try
 		{
+			
 			categoryDAO=new CategoryDAO();
 			noOfRecordsEffected=categoryDAO.addCategory(connection, categoryName);
 			
 		}
 		catch(DAOException daoe)
 		{
+			
 			log.error("Exception Detials: addCategoryName  "+daoe);
 			throw new BOException();
+			
 		}
 		catch(Exception e)
 		{
+			
 			log.error("Exception Detials: addCategoryName  "+e);
 			throw new BOException("Exception Occured In BO");
+			
 		}
 		return noOfRecordsEffected;
 		

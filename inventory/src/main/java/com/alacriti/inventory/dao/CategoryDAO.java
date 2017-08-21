@@ -31,6 +31,7 @@ public List<CategoriesModel> list;
 													ResultSet.CONCUR_UPDATABLE);
 			
 			result = statement.executeQuery("select * from sivaprasad_inventory_CategoryInfo;");
+			
 			list=new ArrayList<CategoriesModel>();
 			
 			while(result.next())
@@ -39,6 +40,7 @@ public List<CategoriesModel> list;
 				list.add(new CategoriesModel(result.getInt(1),result.getString(2)));
 				
 			}
+			
 		}
 		catch(SQLException e)
 		{
@@ -47,6 +49,11 @@ public List<CategoriesModel> list;
 			throw new DAOException("Exception occured In DAO");
 			
 			
+		}
+		catch(Exception e)
+		{
+			log.error("Exception Detials: getAllCategories  "+e);
+			throw new DAOException("Exception Occured In DAO");
 		}
 		return list;
 	}
@@ -60,7 +67,10 @@ public List<CategoriesModel> list;
 		{
 			statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 													ResultSet.CONCUR_UPDATABLE);
-			result = statement.executeQuery("select Category_Id from sivaprasad_inventory_CategoryInfo where Category_Name='"+categoryName+"';");
+			String query="select Category_Id from"
+					+ " sivaprasad_inventory_CategoryInfo where Category_Name='"+categoryName+"';";
+			
+			result = statement.executeQuery(query);
 			
 			while(result.next())
 			{	
@@ -74,9 +84,20 @@ public List<CategoriesModel> list;
 			log.error("Exception Details: getCategoryId :"+e);
 			throw new DAOException("Exception occured In DAO");
 			
+			
+		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Detials: getCategoryId  "+e);
+			throw new DAOException("Exception Occured In DAO");
+			
 		}
 		return model;
+		
 	}
+	
+	
 	
 	public int addCategory(Connection connection,String categoryName) throws DAOException
 	{
@@ -84,7 +105,9 @@ public List<CategoriesModel> list;
 		PreparedStatement preparedStatement = null;
 		try
 		{
-			preparedStatement=connection.prepareStatement("insert into sivaprasad_inventory_CategoryInfo values(null,?);");
+			String query="insert into sivaprasad_inventory_CategoryInfo values(null,?);";
+			preparedStatement=connection.prepareStatement(query);
+			
 			preparedStatement.setString(1, categoryName);
 			noOfRecordsEffected=preparedStatement.executeUpdate();
 		}
@@ -95,6 +118,14 @@ public List<CategoriesModel> list;
 			throw new DAOException("Exception occured In DAO");
 			
 		}
+		catch(Exception e)
+		{
+			
+			log.error("Exception Detials: addCategory  "+e);
+			throw new DAOException("Exception Occured In DAO");
+			
+		}
+		
 		return noOfRecordsEffected;
 	}
 	

@@ -67,14 +67,14 @@ public class InventoryItemsDAO {
 			catch(SQLException sqle)
 			{
 				
-				log.error(" SQL Exception Details ::getAllItemsBySortAndSearch"+sqle);
+				log.error(" SQL Exception Details ::getAllItemsFromDetailsBySortAndSearch "+sqle);
 				throw new DAOException("Exception Occured In DAO");
 				
 			}
 			catch (Exception e)
 			{
 				
-				log.error("Exception Details ::getAllItemsBySortAndSearch"+e);
+				log.error("Exception Details ::getAllItemsFromDetailsBySortAndSearch "+e);
 				throw new DAOException("Exception Occured In DAO");
 				
 			}
@@ -133,10 +133,9 @@ public class InventoryItemsDAO {
 
 			
 			
-		public int addItemsToDetails(Connection connection,CreateItemModel p[]) throws DAOException 
+		public int addItemsToDetails(Connection connection,CreateItemModel p) throws DAOException 
 		{
 				PreparedStatement preparedStatement=null;
-				int noOfRecordsUpdated=0;
 				ResultSet result=null;
 				int itemId=0;
 				try
@@ -144,25 +143,21 @@ public class InventoryItemsDAO {
 					preparedStatement=connection.prepareStatement("insert into "
 							+ "sivaprasadt_inventory_items_details values(null,?,?,?);"
 							,Statement.RETURN_GENERATED_KEYS);
-					
-					for(int i=0;i<(p.length);i++)
-					{	
-						preparedStatement.setString(1, p[i].itemName);
-						preparedStatement.setInt(2, p[i].itemQuantity);	
-						preparedStatement.setInt(3, p[i].categoryId);
-						noOfRecordsUpdated +=preparedStatement.executeUpdate();
+						
+						preparedStatement.setString(1, p.itemName);
+						preparedStatement.setInt(2, p.itemQuantity);	
+						preparedStatement.setInt(3, p.categoryId);
+						preparedStatement.executeUpdate();
+						
 						result = preparedStatement.getGeneratedKeys();
+						
 						while(result!=null && result.next())
 						{
 							
 							itemId=result.getInt(1);
 							
 						}
-						
-						addItemToUpdateDetails(connection,itemId, p[i].itemQuantity,
-								p[i].updatedBy,p[i].itemQuantity, 1);
-					}
-					
+											
 				}
 				catch(SQLException sqle)
 				{
@@ -178,19 +173,12 @@ public class InventoryItemsDAO {
 					throw new DAOException("Exception Occured In DAO");
 					
 				}
-				return noOfRecordsUpdated;
+				return itemId;
 		}	
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		public int updateItemsInDetails(Connection connection,UpdateItemModel p[]) throws DAOException 
+		public int updateItemsInDetails(Connection connection,UpdateItemModel p) throws DAOException 
 		{
 				int noOfRecordsUpdated=0;
 				PreparedStatement preparedStatement=null;
@@ -200,28 +188,14 @@ public class InventoryItemsDAO {
 					preparedStatement=connection.prepareStatement("update  sivaprasadt_inventory_items_details"
 							+ " set Item_Name=?,Available_Quantity=? where Item_Id=?;");
 					
-					for(int i=0;i<(p.length);i++)
-					{
 						
-						preparedStatement.setString(1, p[i].updatedItemName);
-						preparedStatement.setInt(2, p[i].itemUpdatedQuantity);
-						preparedStatement.setInt(3, p[i].itemId);						
+						preparedStatement.setString(1, p.updatedItemName);
+						preparedStatement.setInt(2, p.itemUpdatedQuantity);
+						preparedStatement.setInt(3, p.itemId);	
+						
 						noOfRecordsUpdated=preparedStatement.executeUpdate();
 						
-						if(p[i].purchasedQuantity>0)
-						{
-							addItemToUpdateDetails(connection, p[i].itemId, p[i].purchasedQuantity,
-									p[i].updatedBy, p[i].itemUpdatedQuantity+p[i].consumedQuantity, 1);
-						}
-						
-						if(p[i].consumedQuantity>0)
-						{
-							
-							addItemToUpdateDetails(connection, p[i].itemId, p[i].consumedQuantity,
-									p[i].updatedBy, p[i].itemUpdatedQuantity, 2);
-						}
-						
-					}
+					
 					
 				} 
 				catch(SQLException sqle)
@@ -259,7 +233,9 @@ public class InventoryItemsDAO {
 							+ "sivaprasadt_inventory_items_details where Item_Id=?;");
 					
 					preparedStatement.setInt(1, d.itemId);
+					
 					noOfRecordsEffected=preparedStatement.executeUpdate();
+					
 					deleteItemFromUpdateDetails(connection, d.itemId);
 					
 					
@@ -284,47 +260,7 @@ public class InventoryItemsDAO {
 		
 		
 		
-		
-		
-		
-		public int deleteItemFromUpdateDetails(Connection connection,int itemId)  throws DAOException 
-		{
-				
-				PreparedStatement preparedStatement=null;
-				int noOfRecordsEffected=0;
-				try 
-				{
-					preparedStatement=connection.prepareStatement("delete from "
-							+ "sivaprasadt_inventory_update_details where Item_Id=?;");
-					
-					preparedStatement.setInt(1, itemId);
-					noOfRecordsEffected=preparedStatement.executeUpdate();
-					
-					
-					
-				} 
-				catch(SQLException sqle)
-				{
-					
-					log.error(" SQL Exception Details ::deleteItemFromUpdateDetails"+sqle);	
-					throw new DAOException("Exception Occured In DAO");
-					
-				}
-				catch (Exception e)
-				{
-					
-					log.error("Exception Details ::deleteItemFromUpdateDetails"+e);
-					throw new DAOException("Exception Occured In DAO");
-					
-				}
-				return noOfRecordsEffected;
-		}
-		
-		
-		
-		
-		
-		public static int addItemToUpdateDetails(Connection connection,
+		public int addItemToUpdateDetails(Connection connection,
 				int itemId,int updatedQuantity,String updatedBy,
 				int availableQuantity,int OperationId) throws DAOException 
 		{
@@ -366,6 +302,40 @@ public class InventoryItemsDAO {
 		}
 		
 		
+		
+		
+		public int deleteItemFromUpdateDetails(Connection connection,int itemId)  throws DAOException 
+		{
+				
+				PreparedStatement preparedStatement=null;
+				int noOfRecordsEffected=0;
+				try 
+				{
+					preparedStatement=connection.prepareStatement("delete from "
+							+ "sivaprasadt_inventory_update_details where Item_Id=?;");
+					
+					preparedStatement.setInt(1, itemId);
+					noOfRecordsEffected=preparedStatement.executeUpdate();
+					
+					
+					
+				} 
+				catch(SQLException sqle)
+				{
+					
+					log.error(" SQL Exception Details ::deleteItemFromUpdateDetails"+sqle);	
+					throw new DAOException("Exception Occured In DAO");
+					
+				}
+				catch (Exception e)
+				{
+					
+					log.error("Exception Details ::deleteItemFromUpdateDetails"+e);
+					throw new DAOException("Exception Occured In DAO");
+					
+				}
+				return noOfRecordsEffected;
+		}
 			
 			
 		

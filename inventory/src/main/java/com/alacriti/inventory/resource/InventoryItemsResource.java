@@ -33,6 +33,7 @@ public class InventoryItemsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AvailableItemsModel> getAllItems()
 	{
+		log.debug("Getting All InvetoryItems... " );
 		return inventoryItemsDelegate.getAllInventoryItems();
 	}
 	
@@ -43,6 +44,7 @@ public class InventoryItemsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<AvailableItemsModel> getAllItemsBySortAndSearch(SortAndSearchModel p)
 	{
+		log.debug("Getting All InvetoryItems By Sorting .. " );
 		return inventoryItemsDelegate.getAllInventoryItemsBySortAndSearch(p);
 	}
 	
@@ -52,7 +54,7 @@ public class InventoryItemsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public int updateItemsInDetails(UpdateItemModel p[])
 	{
-		log.debug("DEBUG updateInventoryItems " );
+		log.debug("Updating InvetoryItems... " );
 		return inventoryItemsDelegate.updateItemsInDetails(p);
 		
 		
@@ -66,7 +68,7 @@ public class InventoryItemsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public int addItemsToDetails(CreateItemModel p[])
 	{
-		log.debug("DEBUG addInventoryItems " );
+		log.debug("Adding InvetoryItems... " );
 		return inventoryItemsDelegate.addItemsToDetailsDelegate(p);
 		
 		
@@ -80,7 +82,7 @@ public class InventoryItemsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public int deleteInventoryItem(DeleteItemModel d)
 	{
-		log.debug("DEBUG deleteInventoryItem " );
+		log.debug("Removing InvetoryItems... " );
 		
 		return inventoryItemsDelegate.deleteItemsInDetails(d);
 		

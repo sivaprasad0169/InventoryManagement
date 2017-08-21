@@ -33,7 +33,7 @@ export class DetailsComponent implements OnInit{
     this.inventoryItems.getAllInventoryItems()
       .subscribe(responseData=>this.itemsDetails=responseData,
         resError=>this.getError=resError);
-    console.log(this.getError);
+
 
 
     this._categoryService.getAllCategories()
